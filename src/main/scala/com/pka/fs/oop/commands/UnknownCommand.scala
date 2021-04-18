@@ -3,5 +3,6 @@ import com.pka.fs.oop.filesystem.State
 
 class UnknownCommand extends Command {
   override def apply(previousState: State): State =
-    previousState.setMessage("Command not found...")
+    previousState.setMessageAndReturnThis("Command not found...")
 }
+//fsdf

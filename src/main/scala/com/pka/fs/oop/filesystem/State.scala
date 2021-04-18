@@ -9,7 +9,7 @@ class State(val root: Directory, val workingDir: Directory, val previousOutput: 
     print(State.COMMAND_PROMPT)
   }
 
-  def setMessage(message: String): State =
+  def setMessageAndReturnThis(message: String): State =
     State.apply(root, workingDir, message)
 }
 
