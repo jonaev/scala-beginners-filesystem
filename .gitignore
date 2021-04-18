@@ -1,2 +1,6 @@
 *.class
 *.log
+out/
+.idea/
+.git/
+*.iml
