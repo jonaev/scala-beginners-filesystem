@@ -49,7 +49,7 @@ object State {
       currentDir = /a
       path = ["b"]
        */
-      val oldEntry = previousRoot.findEntry(allDirsInPath.head).asDirectory
+      val oldEntry = previousRoot.goTo(allDirsInPath.head).asDirectory
       previousRoot.replaceEntry(oldEntry.name, updateStructure(oldEntry, allDirsInPath.tail, newEntry))
     }
     /*

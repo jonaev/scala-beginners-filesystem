@@ -22,7 +22,7 @@ class LsTest extends AnyFlatSpec with should.Matchers {
     val state = getState
     val testState = command.apply(state)
 
-    testState.previousOutput shouldBe "a [Directory] testFile[File] "
+    testState.previousOutput shouldBe "a [Directory] testFile [File] "
   }
 
   it should "print directory tree of current working directory content when parameter is provided" in {

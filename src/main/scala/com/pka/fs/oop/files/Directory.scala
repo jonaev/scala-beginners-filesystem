@@ -9,7 +9,7 @@ class Directory(override val parentPath: String, override val name: String, val 
     new Directory(parentPath, name, contents.filter(!_.name.equals(oldEntryName)) :+ directory)
 
 
-  def findEntry(entryName: String): DirEntry = {
+  def goTo(entryName: String): DirEntry = {
     @tailrec
     def findEntryHelper(name: String, contentList: List[DirEntry]): DirEntry =
       if (contentList.isEmpty) null
@@ -27,19 +27,19 @@ class Directory(override val parentPath: String, override val name: String, val 
   def navigateTo(allDirsInPath: List[String]): Directory = {
     /*
     /a/b/c
-    navigateTo(["a", "b", "c"]) = findEntry("a").asDirectory.findEntry("b").asDirectory.findEntry("c").asDirectory.this
+    navigateTo(["a", "b", "c"]) = goTo("a").asDirectory.goTo("b").asDirectory.goTo("c").asDirectory.this
     navigateTo(["a", "b", "c"]) =>
-    findEntry("a").asDirectory.navigateTo(["b", "c"])
-      => findEntry("b").asDirectory.navigateTo(["c"])
-       => findEntry("c").asDirectory.navigateTo([])
+    goTo("a").asDirectory.navigateTo(["b", "c"])
+      => goTo("b").asDirectory.navigateTo(["c"])
+       => goTo("c").asDirectory.navigateTo([])
         => this
      */
     if (allDirsInPath.isEmpty) this
-    else findEntry(allDirsInPath.head).asDirectory.navigateTo(allDirsInPath.tail)
+    else goTo(allDirsInPath.head).asDirectory.navigateTo(allDirsInPath.tail)
   }
 
   def hasEntry(name: String): Boolean = {
-    findEntry(name) != null
+    goTo(name) != null
   }
 
   def getAllFoldersInPath: List[String] = {

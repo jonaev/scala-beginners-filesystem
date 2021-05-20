@@ -6,7 +6,6 @@ import com.pka.fs.oop.filesystem.State
 class Cd(name: String) extends Command {
 
   private def findNewWD(workingDirectory: Directory): Option[DirEntry] = {
-//    workingDirectory.contents.foreach(print(_))
     workingDirectory.contents.filter(_.isDirectory).find(dir => dir.name.equals(name))
   }
 
@@ -16,7 +15,7 @@ class Cd(name: String) extends Command {
       case "." => previousState
       case ".." =>
         val previousWD = previousState.workingDir
-        val newWD = previousWD.navigateTo(previousWD.getAllFoldersInPath.tail)
+        val newWD = previousState.root.navigateTo(previousWD.getAllFoldersInPath.dropRight(1))
         State(previousState.root, newWD)
       case _ =>
         val optionalWD = findNewWD(previousState.workingDir)

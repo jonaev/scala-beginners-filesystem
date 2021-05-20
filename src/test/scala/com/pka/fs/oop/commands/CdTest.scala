@@ -32,11 +32,11 @@ class CdTest extends AnyFlatSpec with should.Matchers {
     val b = new Directory("/a", "b", List(c))
     val a = new Directory("/", "a", List(b))
     val root = new Directory("", "", List(a))
-    val state = State(root, b)
+    val state = State(root, c)
     val testState = command.apply(state)
 
     testState.root shouldBe state.root
-    testState.workingDir shouldBe a
+    testState.workingDir shouldBe b
     testState.previousOutput shouldBe ""
   }
 
